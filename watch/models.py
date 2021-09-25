@@ -7,7 +7,7 @@ from django.dispatch import receiver
 # Create your models here.
 class Neighbourhood(models.Model):
     '''
-    Class that defines the project objects
+    Class that defines the neighbourhood objects
     '''
     name = models.CharField(max_length = 30)
     image = CloudinaryField('image')
@@ -45,5 +45,29 @@ class Neighbourhood(models.Model):
     @classmethod
     def get_user_neighbourhood(cls,neighbourhood):
         return cls.objects.filter(neighbourhood=neighbourhood)
+
+
+
+class User(models.Model):
+    '''
+    Class that defines the user objects
+    '''
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    name = models.CharField(max_length = 90, default="Fullname") 
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    email = models.EmailField()
+    
+
+    def __str__(self):
+        return self.user.username 
+
+@receiver(post_save, sender = User)
+def create_profile(sender, instance,created, **kwargs):
+     if created:
+        User.objects.create(user = instance)
+
+@receiver(post_save,sender = User)
+def save_profile( sender, instance, **kwargs):
+    instance.user.save()
 
 
