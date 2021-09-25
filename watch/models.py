@@ -71,3 +71,15 @@ def save_profile( sender, instance, **kwargs):
     instance.user.save()
 
 
+class Business(models.Model):
+    name = models.CharField(max_length = 80)
+    definition = models.CharField(max_length = 300)
+    email = models.EmailField() 
+    location = models.TextField()    
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete= models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Businesses"
