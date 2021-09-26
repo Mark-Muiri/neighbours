@@ -56,3 +56,19 @@ def business_details(request, id):
     return render(request, "business_details.html", {"business": business, })
 
 
+def business_search(request):
+    """
+    Display search results
+    """
+    if "business" in request.GET and request.GET["business"]:
+        searched_business = request.GET.get("business")
+        business = Business.search_project(searched_business)
+        message = f"{searched_business}"
+
+        return render(
+            request, "search.html", {"projects": projects, "message": message}
+        )
+    else:
+        message = "You haven't searched for any term"
+        return render(request, "search.html", {"message": message})
+
