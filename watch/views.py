@@ -29,7 +29,7 @@ def index(request):
 @login_required(login_url="/accounts/login/")
 def post_business(request):
     """
-    Enables a User to post a project
+    Enables a User to post a business
     """
     if request.method == "POST":
         form = AddBusinessForm(request.POST, request.FILES)
@@ -40,7 +40,7 @@ def post_business(request):
 
         return redirect("index")
     else:
-        form = AddProjectForm()
+        form = AddbusinessForm()
 
     return render(request, "post_business.html", {"form": form})
 
@@ -49,9 +49,7 @@ def business_details(request, id):
     Show business details
     """
     business = Business.objects.get(pk=id)
-    voted = False
-    if project.voters.filter(id=request.user.id).exists():
-        voted = True
+   
 
     return render(request, "business_details.html", {"business": business, })
 
@@ -62,13 +60,26 @@ def business_search(request):
     """
     if "business" in request.GET and request.GET["business"]:
         searched_business = request.GET.get("business")
-        business = Business.search_project(searched_business)
+        business = Business.search_business(searched_business)
         message = f"{searched_business}"
 
         return render(
-            request, "search.html", {"projects": projects, "message": message}
+            request, "search.html", {"business": business, "message": message}
         )
     else:
         message = "You haven't searched for any term"
         return render(request, "search.html", {"message": message})
+    
+
+
+def profile(request):
+    """
+    Displays User's profile page
+    """
+    title = "Profile"
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    business = Business.get_user_business(current_user)
+
+    return render(request, "profile.html", {"profile": profile, "business": business})
 
