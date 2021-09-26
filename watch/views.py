@@ -25,3 +25,21 @@ def index(request):
         "index.html",
         {"title": title, "business": business,},
     )
+
+@login_required(login_url="/accounts/login/")
+def post_business(request):
+    """
+    Enables a User to post a project
+    """
+    if request.method == "POST":
+        form = AddBusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.profile = request.user
+            business.save()
+
+        return redirect("index")
+    else:
+        form = AddProjectForm()
+
+    return render(request, "post_business.html", {"form": form})
