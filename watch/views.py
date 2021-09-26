@@ -83,3 +83,31 @@ def profile(request):
 
     return render(request, "profile.html", {"profile": profile, "business": business})
 
+
+
+def edit_profile(request):
+    """
+    Edits profile
+    """
+    current_user = request.user
+
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            bio = form.cleaned_data["bio"]
+            picture = form.cleaned_data["picture"]
+            email = form.cleaned_data["email"]
+            
+
+            updated_profile = Profile.objects.get(user=current_user)
+            updated_profile.bio = bio
+            updated_profile.picture = picture
+            updated_profile.email = email
+            
+            updated_profile.save()
+        return redirect("profile")
+    else:
+        form = EditProfileForm()
+    return render(request, "edit_profile.html", {"form": form})
+
+
