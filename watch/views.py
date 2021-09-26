@@ -43,3 +43,16 @@ def post_business(request):
         form = AddProjectForm()
 
     return render(request, "post_business.html", {"form": form})
+
+def business_details(request, id):
+    """
+    Show business details
+    """
+    business = Business.objects.get(pk=id)
+    voted = False
+    if project.voters.filter(id=request.user.id).exists():
+        voted = True
+
+    return render(request, "business_details.html", {"business": business, })
+
+
