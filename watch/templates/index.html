@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container-fluid" id="nits">
+    <h1 id="header"
+        style="font-size: 70px; color:goldenrod;font-family: 'Fredericka the Great', cursive;font-weight: bold; ">THE
+        NEIGHBOURHOOD WATCH</h1>
+    <p style="text-align: center; font-style: italic; font-size: 20px; padding:20px;">Discover, recognize, and
+        appreciate local businesses</p>
+    
+
+
+</div>
+
+
+
+<div class="container-fluid">
+
+
+
+    {% for business in business %}
+
+    <div class="card grid-item">
+        <img class="card-img-top" src="{{business.image.url}}" alt="">
+        <div class="card-body">
+            <h4 class="card-title">{{business.name}}</h4>
+
+         
+
+            <a class="text-center" style="color: goldenrod;" href="{% url 'business_details' business.id %}"> View
+                Details</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<footer id="footer">T.N.W 2021</footer>
+</div>
+
+{% endblock%}
