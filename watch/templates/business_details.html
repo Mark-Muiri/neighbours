@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Project Details</title>
+    <title>Business Details</title>
     {{form.media}}
 
     {% block styles %}
@@ -25,10 +25,10 @@
         <br>
         <div class="row " id="project-details">
             <div class="col-md-6">
-                <img src="{{project.image.url}}" alt="">
+                <img src="{{business.image.url}}" alt="">
             </div>
             <div class="col-md-6">
-                <h1>{{project.title}}</h1>
+                <h1>{{business.title}}</h1>
                 <p class="text-muted" style="font-size: 12px;">posted by {{business.profile}} , {{business.pubdate | timesince}} ago </p>
                 <p>Description: {{business.description}}</p>
                 
