@@ -2,14 +2,14 @@ from .models import Business, Neighbourhood, User
 from django.forms import ModelForm
 from django import forms
 
-class AddNeighbourhoodForm(ModelForm):
+class AddBusinessForm(ModelForm):
     class Meta:
-        model = Project
+        model = Business
         exclude = ['profile', 'pubdate',]
 
 class EditUserForm(ModelForm):
     class Meta:
-        model = Profile
+        model = User
         exclude = ['user']
 
 class NeighbourhoodForm(forms.ModelForm):
