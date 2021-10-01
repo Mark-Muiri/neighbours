@@ -1,0 +1,53 @@
+{% load bootstrap4 %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Project Details</title>
+    {{form.media}}
+
+    {% block styles %}
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Fredericka+the+Great&display=swap" rel="stylesheet">
+
+    {% endblock %}
+
+</head>
+
+<body>
+    {% include "navbar.html"%}
+    <div class="container">
+        <br>
+        <div class="row " id="project-details">
+            <div class="col-md-6">
+                <img src="{{project.image.url}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <h1>{{project.title}}</h1>
+                <p class="text-muted" style="font-size: 12px;">posted by {{business.profile}} , {{business.pubdate | timesince}} ago </p>
+                <p>Description: {{business.description}}</p>
+                
+
+                
+            <hr style="color: white;">
+
+           
+        </div>
+        </div>
+    </div>
+
+
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    {% endblock %}
+    </div>
+    <footer id="footer">T.N.W 2021</footer>
+</body>
+
+</html>
