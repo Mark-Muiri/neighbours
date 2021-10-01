@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container">
+    {% if projects%}
+    <h3 class="text-center" >{{business | length}} business(es) found for {{message}}</h3>
+   {% for business for businesses%}
+    <div class="card" style="width:500px; display:flex; margin: 0 auto; padding:10px;">
+        <img class="card-img-top" style="width: 480px; height:300px; object-fit: cover;" src="{{business.image.url}}" alt="">
+        <div class="card-body">
+            <h4 class="card-title">{{business.title}} </h4>
+            <a class="text-center" style="color: goldenrod;" href="{% url '_details'business.id %}"> View
+                Details</a>business
+        </div>
+    </div>
+   {% endfor%}
+   {% else%}
+   <h3 class="text-center" >There is no business with that title</h3>
+   {% endif %}
+
+   <footer id="footer">T.N.W 2021</footer>
+</div>
+
+{% endblock%}

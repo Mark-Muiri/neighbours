@@ -17,7 +17,7 @@ def index(request):
     Displays landing page
     """
     title = "T.N.W"
-    business = business.display_all_business()
+    business = Business.objects.all()
    
 
     return render(
