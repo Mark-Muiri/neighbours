@@ -4,6 +4,11 @@ from .models import Neighbourhood,Business,User
 from .forms import AddBusinessForm, NeighbourhoodForm, EditUserForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import NeighbourhoodSerializer, UserSerializer, BusinessSerializer
+from django.contrib.auth.models import User
+import statistics
 
 
 
@@ -111,3 +116,23 @@ def edit_profile(request):
     return render(request, "edit_profile.html", {"form": form})
 
 
+class BusinessList(APIView):
+    def get(self, request, format=None):
+        business = Business.objects.all()
+        serializers = BusinessSerializer(businesses, many=True)
+        return Response(serializers.data)
+
+
+class UserList(APIView):
+    def get(self, request, format=None):
+        users = User.objects.all()
+        serializers = UserSerializer(users, many=True)
+        return Response(serializers.data)
+
+
+
+class Neighboourhood(APIView):
+    def get(self, request, formart=None):
+        neighbourhood = Neighboourhood.objects.all()
+        serializers = NeighbourhoodSerializer(neighbourhoods, many=True)
+        return Response(serializers.data)

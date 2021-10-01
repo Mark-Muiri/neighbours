@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Project, Profile
+from .models import Neighbourhood, User, Business
 
 class NeighbourhoodSerializer(serializers.ModelSerializer):
     class Meta :
