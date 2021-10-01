@@ -1,1 +1,1 @@
-python-3.8.12
+web: gunicorn neighbours.wsgi
