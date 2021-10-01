@@ -45,7 +45,7 @@ def post_business(request):
 
         return redirect("index")
     else:
-        form = AddbusinessForm()
+        form = AddBusinessForm()
 
     return render(request, "post_business.html", {"form": form})
 
